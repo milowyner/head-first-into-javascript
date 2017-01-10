@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Note to Self</title>
+		<link rel="stylesheet" href="notetoself.css">
+		<script src="notetoself.js"></script>
+	</head>
+	<body>
+		<form>
+			<label for="note_color">Color:</label>
+			<select id="note_color">
+				<option value="yellow">Yellow</option>
+				<option value="green">Green</option>
+				<option value="pink">Pink</option>
+				<option value="blue">Blue</option>
+			</select>
+			<label for="note_text">Text:</label>
+			<input type="text" id="note_text" autocomplete="off">
+			<input type="submit" id="add_button" value="Add Sticky Note to Self">
+		</form>
+
+		<ul id="stickies">
+
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+--------------------------------
+| Mighty Gumball, Inc. Web App |
+--------------------------------
+
+//How do we get the data from the web service to our webpage?
+
+function getData() {
+  var data = call some function that gets data from the website;
+  updatePage(data);
+}
+
+
+//Once we've got the data, how do we update the page?
+
+function updatePage(data) {
+  var div = get element by id;
+  div.innerHTML = show data;
+}
+
+
+//What kinds of problems might we have with getting data from a remote server?
+
+There could be issues with the server.
+We need an error handler to send a message to the user when we can't retrieve
+the data.

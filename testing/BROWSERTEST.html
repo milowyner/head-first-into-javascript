@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lighting the Fuse...</title>
+    <script>
+      localStorage.setItem("fuse", "-");
+      while(true) {
+        var fuse = localStorage.getItem("fuse");
+        try {
+          localStorage.setItem("fuse", fuse + fuse);
+        } catch(e) {
+          alert("Your broswer blew up at " + fuse.length + " with exception:" + e);
+          break;
+        }
+      }
+      localStorage.removeItem("fuse");
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
