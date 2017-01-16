@@ -8,6 +8,13 @@ window.onload = init;
 function init() {
   setupGraphics();
 
+  window.onresize = function() {
+    resizeToWindow();
+  }
+  canvas.onclick = function(event) {
+    handleClick(event.clientX, event.clientY);
+  }
+
   for (var i = 0; i < numberOfWorkers; i++) {
     var worker = new Worker("worker.js");
 
@@ -36,7 +43,9 @@ function startWorkers() {
 }
 
 function processWork(worker, workerResults) {
-  drawRow(workerResults);
+  if (workerResults.generation == generation) {
+    drawRow(workerResults);
+  }
   reassignWorker(worker);
 }
 
@@ -49,4 +58,30 @@ function reassignWorker(worker) {
     worker.idle = false;
     worker.postMessage(task);
   }
+}
+
+function handleClick(x, y) {
+  var width = r_max - r_min;
+  var height = i_min - i_max;
+  var click_r = r_min + width * x / canvas.width;
+  var click_i = i_max + height * y / canvas.height;
+  var zoom = 8;
+  r_min = click_r - width/zoom;
+  r_max = click_r + width/zoom;
+  i_max = click_i - height/zoom;
+  i_min = click_i + height/zoom;
+
+  startWorkers();
+}
+
+function resizeToWindow() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var width = ((i_max - i_min) * canvas.width / canvas.height);
+  var r_mid = (r_max + r_min) / 2;
+  r_min = r_mid - width/2;
+  r_max = r_mid + width/2;
+  rowData = ctx.createImageData(canvas.width, 1);
+
+  startWorkers();
 }
