@@ -11,7 +11,7 @@ function init() {
   for (var i = 0; i < numberOfWorkers; i++) {
     var worker = new Worker("worker.js");
 
-    worker.onmessage = function() {
+    worker.onmessage = function(event) {
       processWork(event.target, event.data);
     }
     worker.idle = true;
@@ -32,5 +32,21 @@ function startWorkers() {
       worker.postMessage(task);
       nextRow++;
     }
+  }
+}
+
+function processWork(worker, workerResults) {
+  drawRow(workerResults);
+  reassignWorker(worker);
+}
+
+function reassignWorker(worker) {
+  var row = nextRow++;
+  if (row >= canvas.height) {
+    worker.idle = true;
+  } else {
+    var task = createTask(row);
+    worker.idle = false;
+    worker.postMessage(task);
   }
 }

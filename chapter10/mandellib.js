@@ -47,7 +47,7 @@ function drawRow(workerResults) {
     if (values[i] < 0) {
       pixelData[red] = pixelData[green] = pixelData[blue] = 0;
     } else {
-      var color = this.pixelData[values[i]];
+      var color = this.palette[values[i]];
       pixelData[red] = color[0];
       pixelData[green] = color[1];
       pixelData[blue] = color[2];
